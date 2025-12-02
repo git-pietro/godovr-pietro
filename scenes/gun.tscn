@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4fy2gvwu3sxs"]
+[gd_scene load_steps=6 format=3 uid="uid://b4fy2gvwu3sxs"]
 
 [ext_resource type="Script" path="res://scripts/gun.gd" id="1_gun"]
 
@@ -6,16 +6,25 @@
 size = Vector3(0.05, 0.1, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gun"]
-albedo_color = Color(0.2, 0.2, 0.2, 1)
-metallic = 0.8
+albedo_color = Color(0.15, 0.15, 0.15, 1)
+metallic = 0.9
+roughness = 0.3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gun"]
-size = Vector3(0.05, 0.1, 0.2)
+size = Vector3(0.08, 0.12, 0.25)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 0.15
 
 [node name="Gun" type="RigidBody3D"]
+mass = 0.5
+gravity_scale = 1.0
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_gun")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Handle" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_gun")
 surface_material_override/0 = SubResource("StandardMaterial3D_gun")
 
@@ -23,13 +32,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gun")
 shape = SubResource("BoxShape3D_gun")
 
 [node name="Barrel" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 1.2, 0, 0.02, -0.18)
 mesh = SubResource("BoxMesh_gun")
+surface_material_override/0 = SubResource("StandardMaterial3D_gun")
 
 [node name="MuzzlePoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.35)
 
 [node name="PickupArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
-shape = SubResource("BoxShape3D_gun")
+shape = SubResource("SphereShape3D_pickup")

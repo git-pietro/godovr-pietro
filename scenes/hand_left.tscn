@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwvh8yqjxn5yx"]
+
+[ext_resource type="Script" path="res://scripts/hand.gd" id="1_hand"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_palm"]
+radius = 0.04
+height = 0.08
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_finger"]
+radius = 0.008
+height = 0.06
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skin"]
+albedo_color = Color(0.95, 0.8, 0.7, 1)
+roughness = 0.7
+
+[node name="HandLeft" type="Node3D"]
+script = ExtResource("1_hand")
+
+[node name="HandMesh" type="Node3D" parent="."]
+
+[node name="Palm" type="MeshInstance3D" parent="HandMesh"]
+transform = Transform3D(1, 0, 0, 0, 0.7, 0, 0, 0, 1.2, 0, 0, -0.02)
+mesh = SubResource("SphereMesh_palm")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="IndexFinger" type="Node3D" parent="HandMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, 0, -0.06)
+
+[node name="Segment1" type="MeshInstance3D" parent="HandMesh/IndexFinger"]
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Segment2" type="MeshInstance3D" parent="HandMesh/IndexFinger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04)
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="MiddleFinger" type="Node3D" parent="HandMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.005, 0, -0.06)
+
+[node name="Segment1" type="MeshInstance3D" parent="HandMesh/MiddleFinger"]
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Segment2" type="MeshInstance3D" parent="HandMesh/MiddleFinger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04)
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="RingFinger" type="Node3D" parent="HandMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005, 0, -0.06)
+
+[node name="Segment1" type="MeshInstance3D" parent="HandMesh/RingFinger"]
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Segment2" type="MeshInstance3D" parent="HandMesh/RingFinger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04)
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Pinky" type="Node3D" parent="HandMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015, 0, -0.055)
+
+[node name="Segment1" type="MeshInstance3D" parent="HandMesh/Pinky"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Segment2" type="MeshInstance3D" parent="HandMesh/Pinky"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 0, -0.03)
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Thumb" type="Node3D" parent="HandMesh"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0.025, 0, -0.02)
+
+[node name="Segment1" type="MeshInstance3D" parent="HandMesh/Thumb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.2, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")
+
+[node name="Segment2" type="MeshInstance3D" parent="HandMesh/Thumb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.04)
+mesh = SubResource("CapsuleMesh_finger")
+surface_material_override/0 = SubResource("StandardMaterial3D_skin")

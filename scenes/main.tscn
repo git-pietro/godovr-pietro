@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8yh1qvxmbj3q"]
+[gd_scene load_steps=9 format=3 uid="uid://c8yh1qvxmbj3q"]
 
 [ext_resource type="Script" path="res://scripts/xr_setup.gd" id="1_w8k5v"]
 [ext_resource type="PackedScene" uid="uid://clk6cbbgo30py" path="res://scenes/room.tscn" id="2_room"]
 [ext_resource type="PackedScene" uid="uid://b4fy2gvwu3sxs" path="res://scenes/gun.tscn" id="3_gun"]
+[ext_resource type="PackedScene" uid="uid://dwvh8yqjxn5yx" path="res://scenes/hand_left.tscn" id="4_hand_left"]
+[ext_resource type="PackedScene" uid="uid://co3xrgn3y6dum" path="res://scenes/hand_right.tscn" id="5_hand_right"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.1, 10)
@@ -35,18 +37,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.3, -0.3)
 tracker = &"left_hand"
 pose = &"aim"
 
-[node name="LeftHandMesh" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.1, 0, 0, -0.05)
-mesh = SubResource("BoxMesh_floor")
+[node name="HandLeft" parent="XROrigin3D/LeftController" instance=ExtResource("4_hand_left")]
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.3, -0.3)
 tracker = &"right_hand"
 pose = &"aim"
 
-[node name="RightHandMesh" type="MeshInstance3D" parent="XROrigin3D/RightController"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.1, 0, 0, -0.05)
-mesh = SubResource("BoxMesh_floor")
+[node name="HandRight" parent="XROrigin3D/RightController" instance=ExtResource("5_hand_right")]
 
 [node name="Room" parent="." instance=ExtResource("2_room")]
 
